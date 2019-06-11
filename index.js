@@ -1,5 +1,6 @@
-const readline = require('readline');
+const readline = require("readline");
 const rl = readline.createInterface(process.stdin, process.stdout);
+start();
 
 function ask(questionText) {
   return new Promise((resolve, reject) => {
@@ -7,12 +8,18 @@ function ask(questionText) {
   });
 }
 
-start();
-
 async function start() {
-  console.log("Let's play a game where you (human) make up a number and I (computer) try to guess it.")
-  let secretNumber = await ask("What is your secret number?\nI won't peek, I promise...\n");
-  console.log('You entered: ' + secretNumber);
-  // Now try and complete the program.
+  let done = false;
+  while (!done) {
+    let answer = await ask("Are we done?");
+    answer = answer.toLowerCase();
+    if (answer.includes("yes")) { done = true; }
+    console.log("Running that loop!");
+  }
+  console.log("You are done!");
   process.exit();
+}
+
+function answerToLowerCase(string) {
+  return string.toLowerCase();
 }
